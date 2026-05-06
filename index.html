@@ -82,25 +82,22 @@
             const [formStatus, setFormStatus] = useState('idle');
             const [currentPhoto, setCurrentPhoto] = useState(0);
 
-            // Data pro slider v úvodní sekci
+            // Data pro slider v úvodní sekci (nyní pouze s jménem a rolí)
             const teamPhotos = [
                 { 
                     src: "Jonas%2002.jpg", 
                     name: "Jonáš Syrovátka", 
-                    role: "Produktový expert",
-                    description: "Vaše finance, Vaše radost. Specializuje se na hloubkovou analýzu trhu, hypotéky, investice a komplexní pojištění. Najde pro Vás řešení."
+                    role: "Produktový expert"
                 },
                 { 
                     src: "Vojta%2002.jpg", 
                     name: "Vojtěch Vencl", 
-                    role: "Mentor a leader",
-                    description: "Odborník na budování týmu a podnikatelské know-how. Zakládá si na transparentnosti, sdílí úspěchy i cenné zkušenosti z praxe pro maximální autenticitu."
+                    role: "Mentor a leader"
                 },
                 { 
                     src: "Viktor%2002.jpg", 
                     name: "Viktor Vencl", 
-                    role: "Specialista na sportovce",
-                    description: "Propojuje svět byznysu a sportu. Řeší unikátní finanční plánování během aktivní kariéry i bezpečný přechod do života po ní. Osobní strategie na míru."
+                    role: "Specialista na sportovce"
                 }
             ];
 
@@ -220,10 +217,9 @@
                                                 }`}
                                             >
                                                 <img src={photo.src} alt={photo.name} className="w-full h-full object-cover object-top" />
-                                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-8 pt-32 text-white">
+                                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24 text-white">
                                                     <h3 className="font-syne text-3xl font-bold">{photo.name}</h3>
-                                                    <p className="text-[#F9E900] font-medium mt-1 mb-3">{photo.role}</p>
-                                                    <p className="text-gray-200 text-sm leading-relaxed">{photo.description}</p>
+                                                    <p className="text-[#F9E900] font-medium mt-1">{photo.role}</p>
                                                 </div>
                                             </div>
                                         ))}
