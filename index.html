@@ -7,25 +7,37 @@
     
     <!-- Tailwind CSS přes CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Konfigurace Tailwindu pro správné načtení vlastních fontů -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        nexa: ['Nexa', 'sans-serif'],
+                        syne: ['"TT Travels Next"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     
-    <!-- Vlastní fonty (lokální načítání s ošetřenými mezerami pomocí %20) -->
+    <!-- Vlastní fonty (lokální načítání s ošetřenými mezerami) -->
     <style>
         @font-face {
             font-family: 'Nexa';
-            src: url('./Nexa-Trial-Regular.ttf') format('opentype');
+            src: url('Nexa-Trial-Regular.ttf') format('opentype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
         }
         @font-face {
             font-family: 'TT Travels Next';
-            src: url('./TT%20Travels%20Next%20Trial%20DemiBold.ttf') format('truetype');
+            src: url('TT%20Travels%20Next%20Trial%20DemiBold.ttf') format('truetype');
             font-weight: 600;
             font-style: normal;
             font-display: swap;
         }
-        .font-syne { font-family: 'TT Travels Next', sans-serif; }
-        .font-poppins { font-family: 'Nexa', sans-serif; }
         ::selection { background-color: #F9E900; color: #080708; }
         html { scroll-behavior: smooth; }
     </style>
@@ -37,7 +49,7 @@
     <!-- Babel pro překlad JSX v prohlížeči -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="bg-[#fafafa] text-[#080708] font-poppins">
+<body class="bg-[#fafafa] text-[#080708] font-nexa">
     
     <div id="root"></div>
 
@@ -230,56 +242,74 @@
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                                 {/* Jonáš */}
-                                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col">
                                     <div className="relative h-80 overflow-hidden bg-gray-200">
                                         <img src="Jonas%2002.jpg" alt="Jonáš Syrovátka" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
-                                    <div className="p-8 relative">
+                                    <div className="p-8 relative flex-grow flex flex-col">
                                         <div className="absolute -top-6 right-8 bg-[#01ABBD] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
                                             <span className="font-syne font-bold text-xl">J</span>
                                         </div>
                                         <h3 className="font-syne text-2xl font-bold mb-1">Jonáš Syrovátka</h3>
                                         <p className="text-[#01ABBD] font-medium mb-4">Expert na produkty</p>
-                                        <p className="text-gray-600 text-sm">
+                                        <p className="text-gray-600 text-sm flex-grow">
                                             Vaše finance, Vaše radost. Specializuje se na hloubkovou analýzu trhu, hypotéky, investice a komplexní pojištění. Najde pro Vás řešení.
                                         </p>
+                                        {/* Odkazy na sítě pod popisem */}
+                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-4">
+                                            <a href="https://www.linkedin.com/in/jonassyrovatka/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={20} /></a>
+                                            <a href="https://www.facebook.com/jonas.syrovatka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={20} /></a>
+                                            <a href="https://www.instagram.com/syrovatka.finance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={20} /></a>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* Vojtěch */}
-                                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col">
                                     <div className="relative h-80 overflow-hidden bg-gray-200">
                                         <img src="Vojta%2002.jpg" alt="Vojtěch Vencl" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
-                                    <div className="p-8 relative">
+                                    <div className="p-8 relative flex-grow flex flex-col">
                                         <div className="absolute -top-6 right-8 bg-[#F9E900] text-[#080708] w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
                                             <span className="font-syne font-bold text-xl">V</span>
                                         </div>
                                         <h3 className="font-syne text-2xl font-bold mb-1">Vojtěch Vencl</h3>
                                         <p className="text-[#01ABBD] font-medium mb-4">Mentor a leader</p>
-                                        <p className="text-gray-600 text-sm">
+                                        <p className="text-gray-600 text-sm flex-grow">
                                             Odborník na budování týmu a podnikatelské know-how. Zakládá si na transparentnosti, sdílí úspěchy i cenné zkušenosti z praxe pro maximální autenticitu.
                                         </p>
+                                        {/* Odkazy na sítě pod popisem */}
+                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-4">
+                                            <a href="https://www.linkedin.com/in/vojt%C4%9Bch-vencl-576baa289/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={20} /></a>
+                                            <a href="https://www.facebook.com/vojtech.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={20} /></a>
+                                            <a href="https://www.instagram.com/vojtech.vencl/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={20} /></a>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* Viktor */}
-                                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                                <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col">
                                     <div className="relative h-80 overflow-hidden bg-gray-200">
                                         <img src="Viktor%2002.jpg" alt="Viktor Vencl" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
-                                    <div className="p-8 relative">
+                                    <div className="p-8 relative flex-grow flex flex-col">
                                         <div className="absolute -top-6 right-8 bg-[#080708] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
                                             <span className="font-syne font-bold text-xl">V</span>
                                         </div>
                                         <h3 className="font-syne text-2xl font-bold mb-1">Viktor Vencl</h3>
                                         <p className="text-[#01ABBD] font-medium mb-4">Specialista na sportovce</p>
-                                        <p className="text-gray-600 text-sm">
+                                        <p className="text-gray-600 text-sm flex-grow">
                                             Propojuje svět byznysu a sportu. Řeší unikátní finanční plánování během aktivní kariéry i bezpečný přechod do života po ní. Osobní strategie na míru.
                                         </p>
+                                        {/* Odkazy na sítě pod popisem */}
+                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-4">
+                                            <a href="https://www.linkedin.com/in/viktor-vencl-2b5790233/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={20} /></a>
+                                            <a href="https://www.facebook.com/viktor.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={20} /></a>
+                                            <a href="https://www.instagram.com/viktor_vencl_sportafinance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={20} /></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
