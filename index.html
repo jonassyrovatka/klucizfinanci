@@ -80,14 +80,32 @@
             const [isMenuOpen, setIsMenuOpen] = useState(false);
             const [isScrolled, setIsScrolled] = useState(false);
             const [formStatus, setFormStatus] = useState('idle');
+            const [currentPhoto, setCurrentPhoto] = useState(0);
+
+            // Data pro slider v úvodní sekci
+            const teamPhotos = [
+                { src: "Jonas%2002.jpg", name: "Jonáš Syrovátka" },
+                { src: "Vojta%2002.jpg", name: "Vojtěch Vencl" },
+                { src: "Viktor%2002.jpg", name: "Viktor Vencl" }
+            ];
 
             useEffect(() => {
+                // Sledování scrollu pro změnu navigace
                 const handleScroll = () => {
                     setIsScrolled(window.scrollY > 20);
                 };
                 window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
+
+                // Rotace fotek ve slideru (každé 4 sekundy)
+                const photoInterval = setInterval(() => {
+                    setCurrentPhoto((prev) => (prev + 1) % teamPhotos.length);
+                }, 4000);
+
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                    clearInterval(photoInterval);
+                };
+            }, [teamPhotos.length]);
 
             const handleFormSubmit = (e) => {
                 e.preventDefault();
@@ -175,9 +193,25 @@
                                     </div>
                                 </div>
                                 
-                                <div className="relative hidden lg:block">
+                                {/* Rotátor profilů místo statického loga */}
+                                <div className="relative hidden lg:block h-[500px] w-full max-w-md mx-auto">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[#01ABBD] to-[#F9E900] rounded-[3rem] transform rotate-3 opacity-20"></div>
-                                    <img src="symbol_color-dark.svg" alt="Kluci z financí Symbol" className="relative z-10 w-full max-w-md mx-auto p-12 bg-white rounded-[3rem] shadow-xl border border-gray-100" />
+                                    <div className="relative z-10 w-full h-full bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden">
+                                        {teamPhotos.map((photo, index) => (
+                                            <div
+                                                key={index}
+                                                className={`absolute inset-0 transition-opacity duration-1000 ${
+                                                    index === currentPhoto ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                                                }`}
+                                            >
+                                                <img src={photo.src} alt={photo.name} className="w-full h-full object-cover object-top" />
+                                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24 text-white">
+                                                    <h3 className="font-syne text-3xl font-bold">{photo.name}</h3>
+                                                    <p className="text-[#F9E900] font-medium mt-1">Kluci z financí</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -256,11 +290,11 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Vaše finance, Vaše radost. Specializuje se na hloubkovou analýzu trhu, hypotéky, investice a komplexní pojištění. Najde pro Vás řešení.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem */}
-                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-4">
-                                            <a href="https://www.instagram.com/syrovatka.finance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={20} /></a>
-                                            <a href="https://www.facebook.com/jonas.syrovatka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={20} /></a>
-                                            <a href="https://www.linkedin.com/in/jonassyrovatka/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={20} /></a>
+                                        {/* Odkazy na sítě pod popisem (zvětšené ikony) */}
+                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
+                                            <a href="https://www.instagram.com/syrovatka.finance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
+                                            <a href="https://www.facebook.com/jonas.syrovatka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
+                                            <a href="https://www.linkedin.com/in/jonassyrovatka/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -280,11 +314,11 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Odborník na budování týmu a podnikatelské know-how. Zakládá si na transparentnosti, sdílí úspěchy i cenné zkušenosti z praxe pro maximální autenticitu.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem */}
-                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-4">
-                                            <a href="https://www.instagram.com/vojtech.vencl/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={20} /></a>
-                                            <a href="https://www.facebook.com/vojtech.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={20} /></a>
-                                            <a href="https://www.linkedin.com/in/vojt%C4%9Bch-vencl-576baa289/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={20} /></a>
+                                        {/* Odkazy na sítě pod popisem (zvětšené ikony) */}
+                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
+                                            <a href="https://www.instagram.com/vojtech.vencl/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
+                                            <a href="https://www.facebook.com/vojtech.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
+                                            <a href="https://www.linkedin.com/in/vojt%C4%9Bch-vencl-576baa289/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -304,11 +338,11 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Propojuje svět byznysu a sportu. Řeší unikátní finanční plánování během aktivní kariéry i bezpečný přechod do života po ní. Osobní strategie na míru.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem */}
-                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-4">
-                                            <a href="https://www.instagram.com/viktor_vencl_sportafinance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={20} /></a>
-                                            <a href="https://www.facebook.com/viktor.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={20} /></a>
-                                            <a href="https://www.linkedin.com/in/viktor-vencl-2b5790233/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={20} /></a>
+                                        {/* Odkazy na sítě pod popisem (zvětšené ikony) */}
+                                        <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
+                                            <a href="https://www.instagram.com/viktor_vencl_sportafinance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
+                                            <a href="https://www.facebook.com/viktor.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
+                                            <a href="https://www.linkedin.com/in/viktor-vencl-2b5790233/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -425,10 +459,11 @@
                                 
                                 <div>
                                     <h4 className="font-syne font-bold text-lg mb-4">Sledujte nás</h4>
+                                    {/* Zvětšené ikony v patičce */}
                                     <div className="flex space-x-4">
-                                        <a href="https://www.instagram.com/kluci_z_financi/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Instagram size={20} /></a>
-                                        <a href="https://www.facebook.com/profile.php?id=61581703097962" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Facebook size={20} /></a>
-                                        <a href="https://www.linkedin.com/company/kluci-z-financ%C3%AD" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Linkedin size={20} /></a>
+                                        <a href="https://www.instagram.com/kluci_z_financi/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Instagram size={24} /></a>
+                                        <a href="https://www.facebook.com/profile.php?id=61581703097962" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Facebook size={24} /></a>
+                                        <a href="https://www.linkedin.com/company/kluci-z-financ%C3%AD" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Linkedin size={24} /></a>
                                     </div>
                                 </div>
                             </div>
