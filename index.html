@@ -8,8 +8,25 @@
     <!-- Tailwind CSS přes CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonty -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Vlastní fonty (lokální načítání) -->
+    <style>
+        @font-face {
+            font-family: 'Nexa';
+            src: url('Nexa-Trial-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'TT Travels Next';
+            src: url('TT Travels Next Trial DemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        .font-syne { font-family: 'TT Travels Next', sans-serif; }
+        .font-poppins { font-family: 'Nexa', sans-serif; }
+        ::selection { background-color: #F9E900; color: #080708; }
+        html { scroll-behavior: smooth; }
+    </style>
     
     <!-- React a ReactDOM přes CDN -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -88,7 +105,7 @@
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between items-center">
                                 <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-                                    <img src="logo_color-dark_long.svg" alt="Kluci z financí" className="h-10 md:h-12 w-auto" />
+                                    <img src="logo_color-dark_long.svg" alt="Kluci z financí" className="h-14 md:h-16 lg:h-20 w-auto transition-all" />
                                 </div>
                                 
                                 {/* Desktop Menu */}
@@ -297,7 +314,7 @@
                                                 </div>
                                                 <div>
                                                     <p className="text-sm text-gray-400">Zavolejte nám</p>
-                                                    <a href="tel:+420731055616" className="text-xl font-semibold hover:text-[#01ABBD] transition-colors">+420 731 055 616</a>
+                                                    <a href="tel:+420777123456" className="text-xl font-semibold hover:text-[#01ABBD] transition-colors">+420 777 123 456</a>
                                                 </div>
                                             </div>
                                             
@@ -365,7 +382,7 @@
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                                 <div className="col-span-1 md:col-span-2">
-                                    <img src="logo_color-dark_vertical.svg" alt="Kluci z financí" className="h-16 mb-6" />
+                                    <img src="logo_color-dark_vertical.svg" alt="Kluci z financí" className="h-24 md:h-28 mb-6" />
                                     <p className="text-gray-600 max-w-sm">
                                         Společně silní, individuálně precizní. Vaše finanční stabilita a růst jsou naším společným cílem.
                                     </p>
@@ -384,9 +401,9 @@
                                 <div>
                                     <h4 className="font-syne font-bold text-lg mb-4">Sledujte nás</h4>
                                     <div className="flex space-x-4">
-                                        <a href="#" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Linkedin size={20} /></a>
-                                        <a href="#" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Facebook size={20} /></a>
-                                        <a href="#" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Instagram size={20} /></a>
+                                        <a href="https://www.linkedin.com/company/kluci-z-financ%C3%AD" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Linkedin size={20} /></a>
+                                        <a href="https://www.facebook.com/profile.php?id=61581703097962" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Facebook size={20} /></a>
+                                        <a href="https://www.instagram.com/kluci_z_financi/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Instagram size={20} /></a>
                                     </div>
                                 </div>
                             </div>
