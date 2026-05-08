@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kluci z financí</title>
     
-    <!-- Tailwind CSS přes CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Konfigurace Tailwindu pro správné načtení vlastních fontů -->
     <script>
         tailwind.config = {
             theme: {
@@ -22,7 +20,6 @@
         }
     </script>
     
-    <!-- Vlastní fonty (lokální načítání s ošetřenými mezerami) -->
     <style>
         @font-face {
             font-family: 'Nexa';
@@ -42,11 +39,9 @@
         html { scroll-behavior: smooth; }
     </style>
     
-    <!-- React a ReactDOM přes CDN -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Babel pro překlad JSX v prohlížeči -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body class="bg-[#fafafa] text-[#080708] font-nexa">
@@ -82,7 +77,7 @@
             const [formStatus, setFormStatus] = useState('idle');
             const [currentPhoto, setCurrentPhoto] = useState(0);
 
-            // Data pro slider v úvodní sekci (nyní pouze s jménem a rolí)
+            // Data pro slider v úvodní sekci
             const teamPhotos = [
                 { 
                     src: "Jonas%2002.jpg", 
@@ -205,7 +200,7 @@
                                     </div>
                                 </div>
                                 
-                                {/* Rotátor profilů místo statického loga */}
+                                {/* Rotátor profilů */}
                                 <div className="relative hidden lg:block h-[500px] w-full max-w-md mx-auto">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[#01ABBD] to-[#F9E900] rounded-[3rem] transform rotate-3 opacity-20"></div>
                                     <div className="relative z-10 w-full h-full bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden">
@@ -229,10 +224,10 @@
                         </div>
                     </section>
 
-                   {/* Služby */}
+                    {/* Služby */}
                     <section id="sluzby" className="py-20 bg-white relative overflow-hidden">
-                        {/* Jemné logo v pozadí (Služby) */}
-                        <div className="absolute top-1/2 right-0 opacity-5 pointer-events-none transform translate-x-1/3 -translate-y-1/2 w-[600px] lg:w-[800px]">
+                        {/* Jemné logo v pozadí (Služby) - Natočeno o 15 stupňů */}
+                        <div className="absolute top-1/2 right-0 opacity-5 pointer-events-none transform translate-x-1/3 -translate-y-1/2 rotate-[15deg] w-[600px] lg:w-[800px]">
                             <img src="symbol_color-dark.svg" alt="" className="w-full h-auto" />
                         </div>
 
@@ -244,15 +239,16 @@
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {/* Služba 1 */}
-<div className="bg-[#fafafa] p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition-all group">
-    <div className="w-14 h-14 bg-[#01ABBD] bg-opacity-10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-        <TrendingUp className="text-[#01ABBD]" size={28} />
-    </div>
-    <h3 className="font-syne text-2xl font-bold mb-4">Komplexní finanční plánování</h3>
-    <p className="text-gray-600 mb-6">
-        Pomůžeme Vám nastavit kvalitní finanční plán, který povede přímo k Vašim cílům. Ať už jde o vysněné bydlení bez starostí, nebo chytré zhodnocení úspor pro svobodnou budoucnost.
-    </p>
-</div>
+                                <div className="bg-[#fafafa] p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition-all group">
+                                    <div className="w-14 h-14 bg-[#01ABBD] bg-opacity-10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                        <TrendingUp className="text-[#01ABBD]" size={28} />
+                                    </div>
+                                    <h3 className="font-syne text-2xl font-bold mb-4">Komplexní finanční plánování</h3>
+                                    <p className="text-gray-600 mb-6">
+                                        Pomůžeme Vám nastavit kvalitní finanční plán, který povede přímo k Vašim cílům. Ať už jde o vysněné bydlení bez starostí, nebo chytré zhodnocení úspor pro svobodnou budoucnost.
+                                    </p>
+                                </div>
+
                                 {/* Služba 2 */}
                                 <div className="bg-[#fafafa] p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition-all group">
                                     <div className="w-14 h-14 bg-[#F9E900] bg-opacity-20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -282,10 +278,10 @@
                         </div>
                     </section>
 
-                   {/* Tým */}
+                    {/* Tým */}
                     <section id="tym" className="py-20 bg-[#fafafa] relative overflow-hidden">
-                        {/* Jemné logo v pozadí (Tým) */}
-                        <div className="absolute top-0 left-0 opacity-5 pointer-events-none transform -translate-x-1/3 -translate-y-1/4 w-[500px] lg:w-[700px] -rotate-12">
+                        {/* Jemné logo v pozadí (Tým) - Nyní naprosto rovné */}
+                        <div className="absolute top-0 left-0 opacity-5 pointer-events-none transform -translate-x-1/3 -translate-y-1/4 w-[500px] lg:w-[700px]">
                             <img src="symbol_color-dark.svg" alt="" className="w-full h-auto" />
                         </div>
 
@@ -311,7 +307,7 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Vaše finance, Vaše radost. Specializuje se na hloubkovou analýzu trhu, hypotéky, investice a komplexní pojištění. Najde pro Vás řešení.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem (zvětšené ikony) */}
+                                        {/* Odkazy na sítě pod popisem */}
                                         <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
                                             <a href="https://www.instagram.com/syrovatka.finance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
                                             <a href="https://www.facebook.com/jonas.syrovatka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
@@ -335,7 +331,7 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Odborník na budování týmu a podnikatelské know-how. Zakládá si na transparentnosti, sdílí úspěchy i cenné zkušenosti z praxe pro maximální autenticitu.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem (zvětšené ikony) */}
+                                        {/* Odkazy na sítě pod popisem */}
                                         <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
                                             <a href="https://www.instagram.com/vojtech.vencl/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
                                             <a href="https://www.facebook.com/vojtech.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
@@ -359,7 +355,7 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Propojuje svět byznysu a sportu. Řeší unikátní finanční plánování během aktivní kariéry i bezpečný přechod do života po ní. Osobní strategie na míru.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem (zvětšené ikony) */}
+                                        {/* Odkazy na sítě pod popisem */}
                                         <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
                                             <a href="https://www.instagram.com/viktor_vencl_sportafinance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
                                             <a href="https://www.facebook.com/viktor.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
@@ -373,8 +369,9 @@
 
                     {/* Kontakt / Formulář */}
                     <section id="kontakt" className="py-20 bg-white relative overflow-hidden">
-                        <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none transform translate-x-1/4 translate-y-1/4">
-                            <img src="symbol_color-dark.svg" alt="" className="w-[800px]" />
+                        {/* Jemné logo v pozadí (Kontakt) */}
+                        <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none transform translate-x-1/4 translate-y-1/4 w-[600px] lg:w-[800px]">
+                            <img src="symbol_color-dark.svg" alt="" className="w-full h-auto" />
                         </div>
                         
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
