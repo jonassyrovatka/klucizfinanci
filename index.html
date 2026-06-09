@@ -126,34 +126,43 @@
             }, [teamPhotos.length]);
 
            const handleFormSubmit = async (e) => {
-    e.preventDefault(); // Zabrání přesměrování stránky
-    setFormStatus('submitting'); // Zapne stav "Odesílám..."
+    // Zabráníme klasickému obnovení stránky
+    e.preventDefault();
+    
+    // Nastavíme stav na 'submitting', aby se na tlačítku ukázalo "Odesílám..."
+    setFormStatus('submitting');
 
-    const form = e.target;
-    const data = new FormData(form);
+    // Automaticky posbíráme všechna data z políček podle jejich 'name'
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
 
     try {
-        // ZDE VLOŽTE SVŮJ FORMSPREE ODKAZ
-        const response = await fetch('https://formspree.io/f/xdavzlen', {
-            method: 'POST',
-            body: data,
+        // Zde vložíte URL adresu z Formsparku (používá se doména submit-form.com)
+        const response = await fetch("https://submit-form.com/x1i9JPTqi", {
+            method: "POST",
             headers: {
-                'Accept': 'application/json'
-            }
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(data),
         });
 
         if (response.ok) {
-            setFormStatus('success'); // Zobrazí zelenou fajfku
-            form.reset(); // Vymaže vyplněná pole pro případ další zprávy
+            // Úspěšně odesláno
+            setFormStatus('success');
+            e.target.reset(); // Volitelné: vymaže vyplněná pole po úspěšném odeslání
+            
+            // Tady si můžete přidat např. zobrazení děkovné hlášky
+            alert("Zpráva byla úspěšně odeslána, brzy se ozveme!"); 
         } else {
-            // Pokud Formspree vrátí chybu (např. špatný formát e-mailu)
-            alert("Jejda, při odesílání formuláře se něco pokazilo. Zkontrolujte údaje.");
-            setFormStatus('idle');
+            // Chyba na straně serveru
+            setFormStatus('error');
+            alert("Něco se pokazilo, zkuste to prosím znovu.");
         }
     } catch (error) {
-        // Chyba spojení (např. výpadek internetu)
-        alert("Došlo k chybě připojení. Zkuste to prosím znovu.");
-        setFormStatus('idle');
+        // Chyba připojení (např. vypadlý internet)
+        setFormStatus('error');
+        alert("Chyba sítě. Zkontrolujte připojení a zkuste to znovu.");
     }
 };
 
