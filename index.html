@@ -117,7 +117,7 @@
                 // Rotace fotek ve slideru (každé 4 sekundy)
                 const photoInterval = setInterval(() => {
                     setCurrentPhoto((prev) => (prev + 1) % teamPhotos.length);
-                }, 4000);
+                }, 3000);
 
                 return () => {
                     window.removeEventListener('scroll', handleScroll);
