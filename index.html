@@ -446,31 +446,31 @@
                                             </div>
                                         ) : (
                                             <form onSubmit={handleFormSubmit} className="space-y-5">
-                                                <div>
-                                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Jméno a příjmení</label>
-                                                    <input type="text" id="name" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all" placeholder="Jan Novák" />
-                                                </div>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                                    <div>
-                                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-                                                        <input type="email" id="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all" placeholder="jan@novak.cz" />
-                                                    </div>
-                                                    <div>
-                                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
-                                                        <input type="tel" id="phone" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all" placeholder="+420 731 055 616" />
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">S čím Vám můžeme pomoci?</label>
-                                                    <textarea id="message" rows="4" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all resize-none" placeholder="Rád bych probral možnosti investování..."></textarea>
-                                                </div>
-                                                <button type="submit" disabled={formStatus === 'submitting'} className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${formStatus === 'submitting' ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-[#F9E900] text-[#080708] hover:bg-[#e5d600] shadow-md shadow-[#F9E900]/20'}`}>
-                                                    {formStatus === 'submitting' ? 'Odesílám...' : 'Odeslat zprávu'}
-                                                </button>
-                                                <p className="text-xs text-gray-400 text-center mt-4">
-                                                    Odesláním souhlasíte se zpracováním osobních údajů pro účely zpětného kontaktování.
-                                                </p>
-                                            </form>
+    <div>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Jméno a příjmení</label>
+        <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all" placeholder="Jan Novák" />
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+            <input type="email" id="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all" placeholder="jan@novak.cz" />
+        </div>
+        <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+            <input type="tel" id="phone" name="phone" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all" placeholder="+420 731 055 616" />
+        </div>
+    </div>
+    <div>
+        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">S čím Vám můžeme pomoci?</label>
+        <textarea id="message" name="message" rows="4" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#01ABBD] focus:border-transparent outline-none transition-all resize-none" placeholder="Rád bych probral možnosti investování..."></textarea>
+    </div>
+    <button type="submit" disabled={formStatus === 'submitting'} className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${formStatus === 'submitting' ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-[#F9E900] text-[#080708] hover:bg-[#e5d600] shadow-md shadow-[#F9E900]/20'}`}>
+        {formStatus === 'submitting' ? 'Odesílám...' : 'Odeslat zprávu'}
+    </button>
+    <p className="text-xs text-gray-400 text-center mt-4">
+        Odesláním souhlasíte se zpracováním osobních údajů pro účely zpětného kontaktování.
+    </p>
+</form>
                                         )}
                                     </div>
                                 </div>
