@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Základní SEO a titulek -->
-    <title>Kluci z financí</title>
-    <meta name="description" content="Vaši průvodci ve světě osobních a firemních financí. Společně silní, individuálně precizní.">
+    <title>Kluci z financí | Nezávislé finanční poradenství a investice</title>
+    <meta name="description" content="Vaši průvodci ve světě osobních a firemních financí pro Pardubice, Žamberk a online. Specializujeme se na dlouhodobé ETF investice, hypotéky a finanční plány pro sportovce i podnikatele.">
+    <meta name="keywords" content="finanční poradce, investice, ETF, S&P 500, hypotéky, finance pro sportovce, Kluci z financí, Pardubice, Žamberk">
     
-    <!-- Open Graph tagy pro sociální sítě (Facebook, LinkedIn, Messenger...) -->
-    <meta property="og:title" content="Kluci z financí">
-    <meta property="og:description" content="Vaši průvodci ve světě osobních a firemních financí. S námi Vaše peníze rostou. Srdcem i rozumem.">
+    <meta property="og:title" content="Kluci z financí | Investice a finanční plánování">
+    <meta property="og:description" content="S námi Vaše peníze rostou. Srdcem i rozumem. Komplexní řešení hypoték, investic a financí na míru.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.klucizfinanci.cz/">
-    <!-- ZDE NASTAVUJEME LOGO PRO NÁHLED -->
     <meta property="og:image" content="https://www.klucizfinanci.cz/nahled-logo.jpg">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -88,33 +86,34 @@
             const [formStatus, setFormStatus] = useState('idle');
             const [currentPhoto, setCurrentPhoto] = useState(0);
 
-            // Data pro slider v úvodní sekci (nyní pouze s jménem a rolí)
+            // Data pro slider v úvodní sekci rozšířená o SEO alt texty
             const teamPhotos = [
                 { 
                     src: "Jonas%2002.jpg", 
                     name: "Jonáš Syrovátka", 
-                    role: "Produktový expert"
+                    role: "Produktový expert",
+                    altText: "Jonáš Syrovátka - Produktový expert na hypotéky a investice | Kluci z financí"
                 },
                 { 
                     src: "Vojta%2002.jpg", 
                     name: "Vojtěch Vencl", 
-                    role: "Mentor a leader"
+                    role: "Mentor a leader",
+                    altText: "Vojtěch Vencl - Odborník na budování týmu a mentoring | Kluci z financí"
                 },
                 { 
                     src: "Viktor%2002.jpg", 
                     name: "Viktor Vencl", 
-                    role: "Specialista na sportovce"
+                    role: "Specialista na sportovce",
+                    altText: "Viktor Vencl - Finanční specialista a plánování pro sportovce | Kluci z financí"
                 }
             ];
 
             useEffect(() => {
-                // Sledování scrollu pro změnu navigace
                 const handleScroll = () => {
                     setIsScrolled(window.scrollY > 20);
                 };
                 window.addEventListener('scroll', handleScroll);
 
-                // Rotace fotek ve slideru (každé 4 sekundy)
                 const photoInterval = setInterval(() => {
                     setCurrentPhoto((prev) => (prev + 1) % teamPhotos.length);
                 }, 3000);
@@ -125,46 +124,36 @@
                 };
             }, [teamPhotos.length]);
 
-           const handleFormSubmit = async (e) => {
-    // Zabráníme klasickému obnovení stránky
-    e.preventDefault();
-    
-    // Nastavíme stav na 'submitting', aby se na tlačítku ukázalo "Odesílám..."
-    setFormStatus('submitting');
+            const handleFormSubmit = async (e) => {
+                e.preventDefault();
+                setFormStatus('submitting');
 
-    // Automaticky posbíráme všechna data z políček podle jejich 'name'
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
 
-    try {
-        // Zde vložíte URL adresu z Formsparku (používá se doména submit-form.com)
-        const response = await fetch("https://submit-form.com/x1i9JPTqi", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
+                try {
+                    const response = await fetch("https://submit-form.com/x1i9JPTqi", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
 
-        if (response.ok) {
-            // Úspěšně odesláno
-            setFormStatus('success');
-            e.target.reset(); // Volitelné: vymaže vyplněná pole po úspěšném odeslání
-            
-            // Tady si můžete přidat např. zobrazení děkovné hlášky
-            alert("Zpráva byla úspěšně odeslána, brzy se ozveme!"); 
-        } else {
-            // Chyba na straně serveru
-            setFormStatus('error');
-            alert("Něco se pokazilo, zkuste to prosím znovu.");
-        }
-    } catch (error) {
-        // Chyba připojení (např. vypadlý internet)
-        setFormStatus('error');
-        alert("Chyba sítě. Zkontrolujte připojení a zkuste to znovu.");
-    }
-};
+                    if (response.ok) {
+                        setFormStatus('success');
+                        e.target.reset(); 
+                        alert("Zpráva byla úspěšně odeslána, brzy se ozveme!"); 
+                    } else {
+                        setFormStatus('error');
+                        alert("Něco se pokazilo, zkuste to prosím znovu.");
+                    }
+                } catch (error) {
+                    setFormStatus('error');
+                    alert("Chyba sítě. Zkontrolujte připojení a zkuste to znovu.");
+                }
+            };
 
             const scrollToSection = (id) => {
                 setIsMenuOpen(false);
@@ -181,7 +170,7 @@
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between items-center">
                                 <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-                                    <img src="logo_color-dark_long.svg" alt="Kluci z financí" className="h-16 md:h-20 lg:h-24 w-auto transition-all" />
+                                    <img src="logo_color-dark_long.svg" alt="Kluci z financí - Finanční poradenství logo" className="h-16 md:h-20 lg:h-24 w-auto transition-all" />
                                 </div>
                                 
                                 {/* Desktop Menu */}
@@ -196,7 +185,7 @@
 
                                 {/* Mobile Menu Button */}
                                 <div className="md:hidden flex items-center">
-                                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-[#080708]">
+                                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-[#080708]" aria-label="Otevřít menu">
                                         {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
                                     </button>
                                 </div>
@@ -216,14 +205,14 @@
 
                     {/* Hero Sekce */}
                     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-                        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-[#01ABBD] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
-                        <div className="absolute top-40 left-0 -ml-20 w-72 h-72 bg-[#F9E900] rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+                        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-[#01ABBD] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" aria-hidden="true"></div>
+                        <div className="absolute top-40 left-0 -ml-20 w-72 h-72 bg-[#F9E900] rounded-full mix-blend-multiply filter blur-3xl opacity-20" aria-hidden="true"></div>
                         
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                                 <div>
                                     <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm mb-6 border border-gray-100">
-                                        <span className="w-2 h-2 rounded-full bg-[#01ABBD] animate-pulse"></span>
+                                        <span className="w-2 h-2 rounded-full bg-[#01ABBD] animate-pulse" aria-hidden="true"></span>
                                         <span className="text-sm font-semibold text-[#080708] tracking-wide uppercase">Společně silní, individuálně precizní</span>
                                     </div>
                                     <h1 className="font-syne text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#080708] leading-tight mb-6">
@@ -231,7 +220,7 @@
                                         <br />Srdcem i rozumem.
                                     </h1>
                                     <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
-                                        Vaši průvodci ve světě osobních a firemních financí. Lidsky, autenticky a přátelsky Vám pomůžeme dělat chytrá rozhodnutí.
+                                        Vaši průvodci ve světě osobních a firemních financí. Lidsky, autenticky a přátelsky Vám pomůžeme dělat chytrá rozhodnutí pro Vaši budoucnost.
                                     </p>
                                     <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                                         <button onClick={() => scrollToSection('kontakt')} className="bg-[#01ABBD] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#0193a3] transition-all flex items-center justify-center group shadow-lg shadow-cyan-500/30">
@@ -246,7 +235,7 @@
                                 
                                 {/* Rotátor profilů */}
                                 <div className="relative h-[400px] lg:h-[500px] w-full max-w-md mx-auto">
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-[#01ABBD] to-[#F9E900] rounded-[3rem] transform rotate-3 opacity-20"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-[#01ABBD] to-[#F9E900] rounded-[3rem] transform rotate-3 opacity-20" aria-hidden="true"></div>
                                     <div className="relative z-10 w-full h-full bg-white rounded-[3rem] shadow-xl border border-gray-100 overflow-hidden">
                                         {teamPhotos.map((photo, index) => (
                                             <div
@@ -255,7 +244,7 @@
                                                     index === currentPhoto ? 'opacity-100 z-10' : 'opacity-0 z-0'
                                                 }`}
                                             >
-                                                <img src={photo.src} alt={photo.name} className="w-full h-full object-cover object-top" />
+                                                <img src={photo.src} alt={photo.altText} className="w-full h-full object-cover object-top" />
                                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24 text-white">
                                                     <h3 className="font-syne text-3xl font-bold">{photo.name}</h3>
                                                     <p className="text-[#F9E900] font-medium mt-1">{photo.role}</p>
@@ -270,8 +259,8 @@
 
                     {/* Služby */}
                     <section id="sluzby" className="py-20 bg-white relative overflow-hidden">
-                        {/* Jemné logo v pozadí (Služby) - Natočeno o 15 stupňů */}
-                        <div className="absolute top-1/2 right-0 opacity-5 pointer-events-none transform translate-x-1/3 -translate-y-1/2 rotate-[15deg] w-[600px] lg:w-[800px]">
+                        {/* Jemné logo v pozadí (Služby) */}
+                        <div className="absolute top-1/2 right-0 opacity-5 pointer-events-none transform translate-x-1/3 -translate-y-1/2 rotate-[15deg] w-[600px] lg:w-[800px]" aria-hidden="true">
                             <img src="symbol_color-dark.svg" alt="" className="w-full h-auto" />
                         </div>
 
@@ -289,7 +278,7 @@
                                     </div>
                                     <h3 className="font-syne text-2xl font-bold mb-4">Komplexní finanční plánování</h3>
                                     <p className="text-gray-600 mb-6">
-                                        Pomůžeme Vám nastavit kvalitní finanční plán, který povede přímo k Vašim cílům. Ať už jde o vysněné bydlení bez starostí, nebo chytré zhodnocení úspor pro svobodnou budoucnost.
+                                        Pomůžeme Vám nastavit kvalitní finanční plán, který povede přímo k Vašim cílům. Ať už jde o vysněné bydlení bez starostí, nebo chytré zhodnocení úspor v ETF pro svobodnou budoucnost.
                                     </p>
                                 </div>
 
@@ -306,7 +295,7 @@
 
                                 {/* Služba 3 */}
                                 <div className="bg-[#080708] p-8 rounded-3xl text-white hover:shadow-xl transition-all group relative overflow-hidden" id="kariera">
-                                    <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#F9E900] rounded-full opacity-10"></div>
+                                    <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#F9E900] rounded-full opacity-10" aria-hidden="true"></div>
                                     <div className="w-14 h-14 bg-white bg-opacity-10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                         <Users className="text-[#F9E900]" size={28} />
                                     </div>
@@ -324,8 +313,8 @@
 
                     {/* Tým */}
                     <section id="tym" className="py-20 bg-[#fafafa] relative overflow-hidden">
-                        {/* Jemné logo v pozadí (Tým) - Otočené o -12 stupňů */}
-                        <div className="absolute top-0 left-0 opacity-5 pointer-events-none transform -translate-x-1/3 -translate-y-1/4 -rotate-12 w-[500px] lg:w-[700px]">
+                        {/* Jemné logo v pozadí (Tým) */}
+                        <div className="absolute top-0 left-0 opacity-5 pointer-events-none transform -translate-x-1/3 -translate-y-1/4 -rotate-12 w-[500px] lg:w-[700px]" aria-hidden="true">
                             <img src="symbol_color-dark.svg" alt="" className="w-full h-auto" />
                         </div>
 
@@ -339,7 +328,7 @@
                                 {/* Jonáš */}
                                 <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col">
                                     <div className="relative h-80 overflow-hidden bg-gray-200">
-                                        <img src="Jonas%2002.jpg" alt="Jonáš Syrovátka" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <img src="Jonas%2002.jpg" alt="Jonáš Syrovátka - Produktový expert a investice" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                     <div className="p-8 relative flex-grow flex flex-col">
@@ -351,11 +340,10 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Vaše finance, Vaše radost. Specializuje se na hloubkovou analýzu trhu, hypotéky, investice a komplexní pojištění. Najde pro Vás řešení.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem */}
                                         <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
-                                            <a href="https://www.instagram.com/syrovatka.finance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
-                                            <a href="https://www.facebook.com/jonas.syrovatka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
-                                            <a href="https://www.linkedin.com/in/jonassyrovatka/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
+                                            <a href="https://www.instagram.com/syrovatka.finance/" aria-label="Instagram Jonáš Syrovátka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
+                                            <a href="https://www.facebook.com/jonas.syrovatka" aria-label="Facebook Jonáš Syrovátka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
+                                            <a href="https://www.linkedin.com/in/jonassyrovatka/" aria-label="LinkedIn Jonáš Syrovátka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -363,7 +351,7 @@
                                 {/* Vojtěch */}
                                 <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col">
                                     <div className="relative h-80 overflow-hidden bg-gray-200">
-                                        <img src="Vojta%2002.jpg" alt="Vojtěch Vencl" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <img src="Vojta%2002.jpg" alt="Vojtěch Vencl - Budování týmu a mentoring" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                     <div className="p-8 relative flex-grow flex flex-col">
@@ -375,11 +363,10 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Odborník na budování týmu a podnikatelské know-how. Zakládá si na transparentnosti, sdílí úspěchy i cenné zkušenosti z praxe pro maximální autenticitu.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem */}
                                         <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
-                                            <a href="https://www.instagram.com/vojtech.vencl/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
-                                            <a href="https://www.facebook.com/vojtech.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
-                                            <a href="https://www.linkedin.com/in/vojt%C4%9Bch-vencl-576baa289/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
+                                            <a href="https://www.instagram.com/vojtech.vencl/" aria-label="Instagram Vojtěch Vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
+                                            <a href="https://www.facebook.com/vojtech.vencl" aria-label="Facebook Vojtěch Vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
+                                            <a href="https://www.linkedin.com/in/vojt%C4%9Bch-vencl-576baa289/" aria-label="LinkedIn Vojtěch Vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -387,7 +374,7 @@
                                 {/* Viktor */}
                                 <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col">
                                     <div className="relative h-80 overflow-hidden bg-gray-200">
-                                        <img src="Viktor%2002.jpg" alt="Viktor Vencl" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                                        <img src="Viktor%2002.jpg" alt="Viktor Vencl - Finance pro sportovce" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                     <div className="p-8 relative flex-grow flex flex-col">
@@ -399,11 +386,10 @@
                                         <p className="text-gray-600 text-sm flex-grow">
                                             Propojuje svět byznysu a sportu. Řeší unikátní finanční plánování během aktivní kariéry i bezpečný přechod do života po ní. Osobní strategie na míru.
                                         </p>
-                                        {/* Odkazy na sítě pod popisem */}
                                         <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center space-x-6">
-                                            <a href="https://www.instagram.com/viktor_vencl_sportafinance/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
-                                            <a href="https://www.facebook.com/viktor.vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
-                                            <a href="https://www.linkedin.com/in/viktor-vencl-2b5790233/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
+                                            <a href="https://www.instagram.com/viktor_vencl_sportafinance/" aria-label="Instagram Viktor Vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Instagram size={28} /></a>
+                                            <a href="https://www.facebook.com/viktor.vencl" aria-label="Facebook Viktor Vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Facebook size={28} /></a>
+                                            <a href="https://www.linkedin.com/in/viktor-vencl-2b5790233/" aria-label="LinkedIn Viktor Vencl" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#01ABBD] transition-colors"><Linkedin size={28} /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -413,15 +399,13 @@
 
                     {/* Kontakt / Formulář */}
                     <section id="kontakt" className="py-20 bg-white relative overflow-hidden">
-                        {/* Jemné logo v pozadí (Kontakt) */}
-                        <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none transform translate-x-1/4 translate-y-1/4 w-[600px] lg:w-[800px]">
+                        <div className="absolute right-0 bottom-0 opacity-5 pointer-events-none transform translate-x-1/4 translate-y-1/4 w-[600px] lg:w-[800px]" aria-hidden="true">
                             <img src="symbol_color-dark.svg" alt="" className="w-full h-auto" />
                         </div>
                         
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                             <div className="bg-[#080708] rounded-[3rem] p-8 md:p-16 text-white shadow-2xl">
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                                    {/* Info */}
                                     <div>
                                         <h2 className="font-syne text-4xl md:text-5xl font-bold mb-6">Pojďme se o tom pobavit</h2>
                                         <p className="text-gray-300 text-lg mb-10">
@@ -451,7 +435,6 @@
                                         </div>
                                     </div>
 
-                                    {/* Formulář */}
                                     <div className="bg-white rounded-3xl p-8 text-[#080708]">
                                         {formStatus === 'success' ? (
                                             <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-10">
@@ -503,7 +486,7 @@
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                                 <div className="col-span-1 md:col-span-2">
-                                    <img src="logo_color-dark_vertical.svg" alt="Kluci z financí" className="h-32 md:h-40 lg:h-48 mb-8" />
+                                    <img src="logo_color-dark_vertical.svg" alt="Kluci z financí - Nezávislé finanční poradenství" className="h-32 md:h-40 lg:h-48 mb-8" />
                                     <p className="text-gray-600 max-w-sm">
                                         Společně silní, individuálně precizní. Vaše finanční stabilita a růst jsou naším společným cílem.
                                     </p>
@@ -521,11 +504,10 @@
                                 
                                 <div>
                                     <h4 className="font-syne font-bold text-lg mb-4">Sledujte nás</h4>
-                                    {/* Zvětšené ikony v patičce */}
                                     <div className="flex space-x-4">
-                                        <a href="https://www.instagram.com/kluci_z_financi/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Instagram size={24} /></a>
-                                        <a href="https://www.facebook.com/profile.php?id=61581703097962" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Facebook size={24} /></a>
-                                        <a href="https://www.linkedin.com/company/kluci-z-financ%C3%AD" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Linkedin size={24} /></a>
+                                        <a href="https://www.instagram.com/kluci_z_financi/" aria-label="Instagram Kluci z financí" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Instagram size={24} /></a>
+                                        <a href="https://www.facebook.com/profile.php?id=61581703097962" aria-label="Facebook Kluci z financí" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Facebook size={24} /></a>
+                                        <a href="https://www.linkedin.com/company/kluci-z-financ%C3%AD" aria-label="LinkedIn Kluci z financí" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#01ABBD] hover:text-white transition-colors"><Linkedin size={24} /></a>
                                     </div>
                                 </div>
                             </div>
