@@ -109,20 +109,32 @@
             ];
 
             useEffect(() => {
-                const handleScroll = () => {
-                    setIsScrolled(window.scrollY > 20);
-                };
-                window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+        setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
 
-                const photoInterval = setInterval(() => {
-                    setCurrentPhoto((prev) => (prev + 1) % teamPhotos.length);
-                }, 3000);
+    const photoInterval = setInterval(() => {
+        setCurrentPhoto((prev) => (prev + 1) % teamPhotos.length);
+    }, 3000);
 
-                return () => {
-                    window.removeEventListener('scroll', handleScroll);
-                    clearInterval(photoInterval);
-                };
-            }, [teamPhotos.length]);
+    // --- TUTO ČÁST SEM PŘIDEJ: Kontrola mřížky v URL po načtení webu ---
+    if (window.location.hash) {
+        const hashId = window.location.hash.substring(1); // odstraní znak #
+        setTimeout(() => {
+            const element = document.getElementById(hashId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 300); // kratičká pauza, aby React stihl vykreslit formulář
+    }
+    // -----------------------------------------------------------------
+
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+        clearInterval(photoInterval);
+    };
+}, [teamPhotos.length]);
 
             const handleFormSubmit = async (e) => {
                 e.preventDefault();
